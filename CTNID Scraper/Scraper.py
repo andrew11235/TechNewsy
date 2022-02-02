@@ -1,3 +1,10 @@
+######
+# Cool Tech Newsy Item of the Day Generator
+# Source: https://ctnid.blogspot.com/ 
+#
+# Andrew W
+#####
+
 import random
 import requests
 from re import sub
