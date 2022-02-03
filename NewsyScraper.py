@@ -51,10 +51,9 @@ def gen_text(g_dict: dict, itters: int = 1_000_000):
         for i in range(itters):
             try:
                 while True:
-                    starting = choice(list(g_dict.keys()))
+                    txt_list = list(choice(list(g_dict.keys())))
 
-                    if not any("." in i for i in starting):
-                        txt_list = [starting[i] for i in range(3)]
+                    if not any("." in i for i in txt_list):
                         break
 
                 while len(txt_list) < 100 or txt_list[-1][-1] not in [".", "!", "?"]:
