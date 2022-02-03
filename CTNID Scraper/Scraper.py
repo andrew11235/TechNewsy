@@ -47,7 +47,6 @@ def gen_grams() -> dict:
 
 def gen_text(g_dict: dict, itters: int):
     with open("PostList.txt", "w", encoding="UTF-8") as f:
-        f.write("[")
         for i in range(itters):
             try:
                 while True:
@@ -74,9 +73,8 @@ def gen_text(g_dict: dict, itters: int):
             print(body)
 
             f.write(f', "{body}"' if i > 0 else f'"{body}"')
-        f.write("]")
 
-
+            
 if __name__ == '__main__':
     get_corpus()
     gen_text(gen_grams(), 500)
