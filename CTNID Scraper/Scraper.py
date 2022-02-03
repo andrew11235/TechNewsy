@@ -45,7 +45,7 @@ def gen_grams() -> dict:
         return dict(FreqDist(list(ngrams(corpus.read().split(), 3))))
 
 
-def gen_text(g_dict: dict, itters: int):
+def gen_text(g_dict: dict, itters: int = 1_000_000):
     with open("PostList.txt", "w", encoding="UTF-8") as f:
         for i in range(itters):
             try:
