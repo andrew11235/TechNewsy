@@ -1,7 +1,8 @@
 ######
 # Cool Tech Newsy Item of the Day Generator
 # Source: https://ctnid.blogspot.com/ 
-#
+# Web: https://sites.google.com/cusd.me/tech-newsy-generator/newsy-generator
+# 
 # 2022 Andrew Wang
 #####
 
