@@ -65,17 +65,18 @@ def gen_text(g_dict: dict, itters: int = 1_000_000):
 
             except IndexError:
                 i -= 1
-                continue
+                
+            else:
+                body = " ".join(txt_list).capitalize()
+                body = ". ".join(map(lambda s: s.strip().capitalize(), split(r'\.(?=[\D])', body)))
+                print(i, body)
 
-            body = " ".join(txt_list).capitalize()
-            body = ". ".join(map(lambda s: s.strip().capitalize(), split(r'\.(?=[\D])', body)))
-            print(i)
-            print(body)
+                f.write(f', "{body}"' if i > 0 else f'"{body}"')
 
-            f.write(f', "{body}"' if i > 0 else f'"{body}"')
 
-            
 if __name__ == '__main__':
     get_corpus()
-    gen_text(gen_grams(), 500)
+    gen_text(gen_grams(), 100)
+
+
 
