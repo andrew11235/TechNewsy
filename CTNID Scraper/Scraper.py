@@ -7,7 +7,7 @@
 
 import requests
 from random import choice, choices
-from re import sub
+from re import sub, split
 
 from bs4 import BeautifulSoup
 from nltk import FreqDist, ngrams
@@ -69,7 +69,7 @@ def gen_text(g_dict: dict, itters: int):
                 continue
 
             body = " ".join(txt_list).capitalize()
-            body = ". ".join(map(lambda s: s.strip().capitalize(), body.split('.')))
+            body = ". ".join(map(lambda s: s.strip().capitalize(), split(r'\.(?=[\D])', body)))
             print(i)
             print(body)
 
@@ -78,5 +78,6 @@ def gen_text(g_dict: dict, itters: int):
 
 
 if __name__ == '__main__':
-    # get_corpus()
+    get_corpus()
     gen_text(gen_grams(), 500)
+
