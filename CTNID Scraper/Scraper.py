@@ -5,9 +5,10 @@
 # Andrew W
 #####
 
-import random
 import requests
+from random import choice, choices
 from re import sub
+
 from bs4 import BeautifulSoup
 from nltk import FreqDist, ngrams
 
@@ -28,7 +29,6 @@ def get_corpus():
                     for line in p:
                         if not (line.startswith("https:") or line.startswith("Credit")):
                             line = sub(r"http\S+", "", line)
-                            line = sub(r"http\S+", "", line)
                             line = sub(r"\.(?=[\S])", ". ", line)
                             line = line.replace('"', "").replace('(', "").replace(')', "")
                             body += line
@@ -40,25 +40,27 @@ def get_corpus():
                 break
 
 
-def generate_text():
+def gen_grams() -> dict:
     with open("TechNewsy.txt", "r", encoding="UTF-8") as corpus:
-        gram_dict = dict(FreqDist(list(ngrams(corpus.read().split(), 3))))
+        return dict(FreqDist(list(ngrams(corpus.read().split(), 3))))
 
-    with open("PostList.txt", "a", encoding="UTF-8") as f:
+
+def gen_text(g_dict: dict, itters: int):
+    with open("PostList.txt", "w", encoding="UTF-8") as f:
         f.write("[")
-        for i in range(500):
+        for i in range(itters):
             try:
                 while True:
-                    starting = random.choice(list(gram_dict.keys()))
+                    starting = choice(list(g_dict.keys()))
 
                     if "." not in starting:
                         txt_list = [starting[i] for i in range(3)]
                         break
 
                 while len(txt_list) < 100 or txt_list[-1][-1] not in [".", "!", "?"]:
-                    lis = {k[-1]: gram_dict[k] for k in gram_dict if k[0] == txt_list[-2] and k[1] == txt_list[-1]}
+                    lis = {k[-1]: g_dict[k] for k in g_dict if k[0] == txt_list[-2] and k[1] == txt_list[-1]}
 
-                    next_word = random.choices(list(lis.keys()), list(lis.values()))[0]
+                    next_word = choices(list(lis.keys()), list(lis.values()))[0]
 
                     txt_list.append(next_word)
 
@@ -75,10 +77,6 @@ def generate_text():
         f.write("]")
 
 
-def main():
-    get_corpus()
-    generate_text()
-
-
 if __name__ == '__main__':
-    main()
+    # get_corpus()
+    gen_text(gen_grams(), 500)
