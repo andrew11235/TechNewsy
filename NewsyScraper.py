@@ -2,7 +2,7 @@
 # Cool Tech Newsy Item of the Day Generator
 # Source: https://ctnid.blogspot.com/ 
 #
-# Andrew W
+# 2022 Andrew Wang
 #####
 
 import requests
