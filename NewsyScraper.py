@@ -53,7 +53,7 @@ def gen_text(g_dict: dict, itters: int = 1_000_000):
                 while True:
                     starting = choice(list(g_dict.keys()))
 
-                    if "." not in starting:
+                    if not any("." in i for i in starting):
                         txt_list = [starting[i] for i in range(3)]
                         break
 
